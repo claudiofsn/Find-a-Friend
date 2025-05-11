@@ -4,8 +4,7 @@ import { Pet } from "prisma/generated/client";
 interface CreatePetUseCaseRequest {
   name: string;
   org_id: string;
-  size: number;
-  birth_date: Date;
+  birth_date: string | null;
 }
 
 interface CreatePetUseCaseReponse {

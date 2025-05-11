@@ -1,24 +1,26 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { PetRepository } from "@/repositories/pet-repository";
-import { CreatePetUseCase } from "./create";
 import { InMemoryPetRepository } from "@/repositories/in-memory/in-memory-pet-repository";
+import { GetPetProfileUseCase } from "./get-pet-details";
 
-describe("Create Pet Use Case", () => {
+describe("Get Pet Profile Use Case", () => {
   let petsRepository: PetRepository;
-  let sut: CreatePetUseCase;
+  let sut: GetPetProfileUseCase;
 
   beforeEach(() => {
     petsRepository = new InMemoryPetRepository();
-    sut = new CreatePetUseCase(petsRepository);
+    sut = new GetPetProfileUseCase(petsRepository);
   });
 
   it("should be able to create a pet", async () => {
-    const { pet } = await sut.execute({
+    const petCreated = await petsRepository.create({
       name: "Hecate",
-      org_id: "org-1",
-      birth_date: new Date(2005, 0, 20, 8, 0, 0).toISOString(),
+      org_id: "org-01",
     });
 
+    const { pet } = await sut.execute({ id: petCreated.id });
+
     expect(pet.id).toEqual(expect.any(String));
+    expect(pet.name).toEqual(expect.any(String));
   });
 });

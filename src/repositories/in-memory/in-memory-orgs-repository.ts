@@ -6,13 +6,18 @@ export class InMemoryOrgsRepository implements OrgsRepository {
   public items: Org[] = [];
 
   async create(data: Prisma.OrgUncheckedCreateInput): Promise<Org> {
-    const org = {
+    const org: Org = {
       id: data.id ?? randomUUID(),
       name: data.name,
       email: data.email,
       password_hash: data.password_hash,
-      latitude: new Prisma.Decimal(data.latitude.toString()),
-      longitude: new Prisma.Decimal(data.longitude.toString()),
+      phone: data.phone,
+      cep: data.cep,
+      uf: data.uf,
+      city: data.city,
+      neighborhood: data.neighborhood,
+      street: data.street,
+      number: data.number,
     };
 
     this.items.push(org);

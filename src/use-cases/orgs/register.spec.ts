@@ -15,11 +15,16 @@ describe("Register Org Use Case", () => {
 
   it("should be able to register", async () => {
     const { org } = await sut.execute({
-      name: "Jhon Doe",
+      name: "Org 01",
       email: "teste@gmail.com",
       password: "123456",
-      latitude: -21.271671,
-      longitude: -47.303047,
+      cep: "cep-01",
+      city: "cidade",
+      neighborhood: "bairro-01",
+      number: "s/n",
+      phone: "16999999",
+      street: "rua-01",
+      uf: "bairro-01",
     });
 
     expect(org.id).toEqual(expect.any(String));
@@ -27,14 +32,22 @@ describe("Register Org Use Case", () => {
 
   it("should hash user password upon registration", async () => {
     const { org } = await sut.execute({
-      name: "Jhon Doe",
+      name: "Org 01",
       email: "teste@gmail.com",
-      password: "teste",
-      latitude: -21.271671,
-      longitude: -47.303047,
+      password: "123456",
+      cep: "cep-01",
+      city: "cidade",
+      neighborhood: "bairro-01",
+      number: "s/n",
+      phone: "16999999",
+      street: "rua-01",
+      uf: "bairro-01",
     });
 
-    const isPasswordCorrectlyHashed = await compare("teste", org.password_hash);
+    const isPasswordCorrectlyHashed = await compare(
+      "123456",
+      org.password_hash,
+    );
 
     expect(isPasswordCorrectlyHashed).toBe(true);
   });
@@ -43,21 +56,31 @@ describe("Register Org Use Case", () => {
     const email = "jhondoe@example.com";
 
     await sut.execute({
-      name: "Jhon Doe",
+      name: "Org 01",
       email,
       password: "123456",
-      latitude: -21.271671,
-      longitude: -47.303047,
+      cep: "cep-01",
+      city: "cidade",
+      neighborhood: "bairro-01",
+      number: "s/n",
+      phone: "16999999",
+      street: "rua-01",
+      uf: "bairro-01",
     });
 
     await expect(
       async () =>
         await sut.execute({
-          name: "Jhon Doe",
+          name: "Org 01",
           email,
           password: "123456",
-          latitude: -21.271671,
-          longitude: -47.303047,
+          cep: "cep-01",
+          city: "cidade",
+          neighborhood: "bairro-01",
+          number: "s/n",
+          phone: "16999999",
+          street: "rua-01",
+          uf: "bairro-01",
         }),
     ).rejects.toBeInstanceOf(OrgAlreadyExistsError);
   });

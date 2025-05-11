@@ -16,11 +16,16 @@ describe("Authenticate Use Case", () => {
 
   it("should be able to authenticate", async () => {
     await orgsRepository.create({
-      name: "Jhon Doe",
+      name: "Org 01",
       email: "teste@gmail.com",
+      cep: "cep-01",
+      city: "cidade",
+      neighborhood: "bairro-01",
+      number: "s/n",
+      phone: "16999999",
+      street: "rua-01",
+      uf: "bairro-01",
       password_hash: await hash("123456", 6),
-      latitude: -21.271671,
-      longitude: -47.303047,
     });
 
     const { org } = await sut.execute({
@@ -42,11 +47,16 @@ describe("Authenticate Use Case", () => {
 
   it("should not be able to authenticate with wrong password", async () => {
     await orgsRepository.create({
-      name: "Jhon Doe",
+      name: "Org 01",
       email: "teste@gmail.com",
+      cep: "cep-01",
+      city: "cidade",
+      neighborhood: "bairro-01",
+      number: "s/n",
+      phone: "16999999",
+      street: "rua-01",
+      uf: "bairro-01",
       password_hash: await hash("123456", 6),
-      latitude: -21.271671,
-      longitude: -47.303047,
     });
 
     await expect(() =>

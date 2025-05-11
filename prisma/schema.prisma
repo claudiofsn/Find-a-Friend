@@ -18,7 +18,6 @@ model Pet {
   id         String    @id @default(uuid())
   name       String
   birth_date DateTime?
-  size       Float
   org_id     String
   org        Org       @relation(fields: [org_id], references: [id])
 
@@ -26,13 +25,20 @@ model Pet {
 }
 
 model Org {
-  id            String  @id @default(uuid())
+  id            String @id @default(uuid())
   name          String
-  email         String  @unique
+  email         String @unique
   password_hash String
-  latitude      Decimal
-  longitude     Decimal
-  Pet           Pet[]
+  phone         String
+
+  cep          String
+  uf           String
+  city         String
+  neighborhood String
+  street       String
+  number       String
+
+  Pet Pet[]
 
   @@map("orgs")
 }
