@@ -38,4 +38,12 @@ export class InMemoryPetRepository implements PetRepository {
 
     return pet;
   }
+
+  async delete(id: string): Promise<void> {
+    const petIndex = this.pets.findIndex((pet) => pet.id === id);
+
+    if (petIndex > -1) {
+      this.pets.splice(petIndex, 1);
+    }
+  }
 }

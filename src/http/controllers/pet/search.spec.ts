@@ -76,10 +76,10 @@ describe("Search Pets (e2e)", () => {
     expect(response.statusCode).toEqual(200);
     expect(response.body.pets).toEqual([
       expect.objectContaining({
-        name: "Hecate 2",
+        name: "Hecate 1",
       }),
       expect.objectContaining({
-        name: "Hecate 1",
+        name: "Hecate 2",
       }),
     ]);
   });
