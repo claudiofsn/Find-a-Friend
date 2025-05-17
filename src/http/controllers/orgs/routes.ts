@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
-import { register } from "./register";
 import { authenticate } from "./authenticate";
+import { register } from "./register";
 
 export async function orgsRoutes(app: FastifyInstance) {
   app.post("/orgs", register);

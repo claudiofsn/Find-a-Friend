@@ -11,7 +11,7 @@ export async function deletePet(request: FastifyRequest, reply: FastifyReply) {
 
   const deletePetUseCase = makeDeleteUseCase();
 
-  await deletePetUseCase.execute(petId);
+  await deletePetUseCase.execute({ petId, orgId: request.user.sub });
 
   return reply.status(204).send();
 }
